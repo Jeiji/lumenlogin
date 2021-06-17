@@ -28,6 +28,8 @@ services:
   frontend:
     build: frontend
     working_dir: /app
+    ports:
+      - "${FRONTEND_PORT-3000}:3000"
     tty: true
     volumes:
       - ..:/app
