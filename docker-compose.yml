@@ -26,6 +26,9 @@ services:
     restart: unless-stopped
     volumes:
       - ./src:/var/www/html
+      - ./frontend:/app/frontend
+      - /app/frontend/node_modules
+      - /app/frontend/lumenlogin/node_modules
     ports:
       - "80:80"
     depends_on:
