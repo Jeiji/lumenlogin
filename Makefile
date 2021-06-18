@@ -1,5 +1,5 @@
 SHELL := /bin/bash
-COMPOSE := docker-compose -f docker/docker-compose.yaml -p lumen
+COMPOSE := docker-compose -f docker/docker-compose.yaml
 
 .PHONY: composer
 composer:
@@ -16,7 +16,10 @@ ifeq (,$(wildcard ./my-app/.env))
 endif
 
 .PHONY: dev
-dev: install
+dev: 
+	@echo "Build first? [y/n]"; \
+    read line; if [ $$line = "y" ]; then pushd docker && docker-compose build && popd; fi
+	$(MAKE) install
 	$(COMPOSE) up $(ARGS)
 
 .PHONY: cpenv
