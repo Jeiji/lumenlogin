@@ -14,5 +14,5 @@
 */
 
 $router->get('/', function () use ($router) {
-    return '<h1>Hello, Jeiji!</h1>';
+    return $router->app->version();
 });
