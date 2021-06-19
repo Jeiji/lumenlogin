@@ -3,7 +3,7 @@ COMPOSE := docker-compose -f docker/docker-compose.yaml -p lumen
 
 .PHONY: composer
 composer:
-	docker run --rm -it --volume "${PWD}/my-app:/app" composer $(ARGS)
+	docker run --rm -it --volume "${PWD}/my-app:/app" composer ${ARGS}
 
 .PHONY: install
 install:

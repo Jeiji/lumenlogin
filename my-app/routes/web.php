@@ -24,3 +24,7 @@ $router->get('/api/welcome', function () use ($router) {
     // return response($content, $status)
     //               ->header('Content-Type', $value);
 });
+
+$router->get('/api/info', function () use ($router) {
+    return phpinfo();
+});
