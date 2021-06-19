@@ -2,14 +2,17 @@ version: "3.5"
 
 services:
   nginx:
-    build: ./nginx
+    image: nginx:latest
     command: nginx-debug -g 'daemon off;'
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
     ports:
       - "${NGINX_PORT-8000}:80"
     depends_on:
-      - app
+      - api
+      - frontend
 
-  app:
+  api:
     image: php:fpm-alpine3.13
     working_dir: /app
     volumes:
@@ -26,19 +29,18 @@ services:
       - postgres
 
   frontend:
-    build: frontend
+    image: node:15.4-alpine3.12
+    command: yarn dev
     working_dir: /app
-    ports:
-      - "${FRONTEND_PORT-3000}:3000"
     tty: true
     volumes:
-      - ..:/app
+      - ../frontend:/app
       - /app/node_modules
 
   postgres:
     image: postgres
     ports:
-      - "${POSTGRES_PORT-5432}:5432"
+      - "${POSTGRES_PORT-5434}:5432"
     environment:
       POSTGRES_PASSWORD: mysecretpassword
       POSTGRES_USER: postgres

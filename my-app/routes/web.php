@@ -13,6 +13,10 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return '<h1>Hello, Jeiji!</h1>';
+$router->get('/api', function () use ($router) {
+    return '<h1>Hello, Jeiji from PHP!</h1>';
+});
+
+$router->get('/api/welcome', function () use ($router) {
+    return response()->json(['name' => 'Jeiji']);
 });
