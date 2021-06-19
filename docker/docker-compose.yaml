@@ -13,7 +13,7 @@ services:
       - frontend
 
   api:
-    image: php:fpm-alpine3.13
+    build: api
     working_dir: /app
     volumes:
       - ../my-app:/app
