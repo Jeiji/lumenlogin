@@ -5,10 +5,11 @@ class Welcome extends React.Component {
     super(props);
     this.state = {
       loading: true,
+      name: "...",
     };
   }
   render() {
-    return <h1>Hello, Jeiji</h1>;
+    return <h1>Hello, {this.state.name}</h1>;
   }
 
   componentDidMount() {
@@ -16,6 +17,7 @@ class Welcome extends React.Component {
       .then((res) => res.json())
       .then((result) => {
         console.log(result);
+        this.setState(result);
       });
   }
 }
