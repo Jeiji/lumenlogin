@@ -13,10 +13,14 @@
 |
 */
 
+use Illuminate\Http\Response;
+
 $router->get('/api', function () use ($router) {
     return '<h1>Hello, Jeiji from PHP!</h1>';
 });
 
 $router->get('/api/welcome', function () use ($router) {
-    return response()->json(['name' => 'Jeiji']);
+    // return response()->json(['name' => 'Jeiji!']);
+    return response($content, $status)
+                  ->header('Content-Type', $value);
 });
