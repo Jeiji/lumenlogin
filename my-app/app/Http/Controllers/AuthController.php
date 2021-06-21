@@ -9,9 +9,9 @@ use Log;
 class AuthController extends Controller
 {
     public function login(Request $request) {
-        Log::info('Hey, just testing log', ['request' => $request->json()->all()]);
-        $email = $request->json()->get('email');
-        $password = $request->json()->get('password');
+        Log::info('Hey, just testing log', ['request' => $request]);
+        $email = $request->email;
+        $password = $request->password;
 
         // データ全部届いた？
         if (empty($email) or empty($password)) {

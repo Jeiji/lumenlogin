@@ -22,14 +22,12 @@ class Welcome extends React.Component {
 
   handleSubmit(event) {
     // alert(`YUUUUUP: ${this.state.email}, ${this.state.password}`)
+    let formData = new FormData(document.querySelector('#loginForm'))
     const requestOptions = {
       method: 'POST',
-      headers: { 'Content-Type': 'application_json'},
-      body: JSON.stringify({
-        email: this.state.email,
-        password: this.state.password
-      })
+      body: formData
     }
+    console.log(...formData);
     fetch("/api/login", requestOptions)
       .then((res) => res.json())
       .then((result) => {
@@ -41,7 +39,7 @@ class Welcome extends React.Component {
     return (
       <div class="login">
         <h1>Login</h1>
-          <form method="post" onSubmit={this.handleSubmit}>
+          <form id="loginForm" method="post" onSubmit={this.handleSubmit}>
             <input onChange={this.handleInputChange} type="text" name="email" placeholder="Email" required="required" />
               <input onChange={this.handleInputChange} type="password" name="password" placeholder="Password" required="required" />
               <button type="submit" class="btn btn-primary btn-block btn-large">Let me in.</button>
@@ -50,14 +48,14 @@ class Welcome extends React.Component {
     )
   }
 
-  componentDidMount() {
-    fetch("/api/welcome")
-      .then((res) => res.json())
-      .then((result) => {
-        console.log(result);
-        this.setState(result);
-      });
-  }
+  // componentDidMount() {
+  //   fetch("/api/welcome")
+  //     .then((res) => res.json())
+  //     .then((result) => {
+  //       console.log(result);
+  //       this.setState(result);
+  //     });
+  // }
 }
 
 export default Welcome;
