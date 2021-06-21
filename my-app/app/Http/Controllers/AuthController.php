@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Log;
 
 class AuthController extends Controller
 {
     public function login(Request $request) {
-        $email = $request->email;
-        $password = $request->password;
+        Log::info('Hey, just testing log', ['request' => $request->json()->all()]);
+        $email = $request->json()->get('email');
+        $password = $request->json()->get('password');
 
         // データ全部届いた？
         if (empty($email) or empty($password)) {
