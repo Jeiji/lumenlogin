@@ -21,24 +21,23 @@ $router->group(['prefix' => 'api'], function() use ($router) {
 
 
     //認証ラウト
-    $router->post('login', 'AuthController@Login');
-    $router->post('register', 'AuthController@Register');
-    $router->post('logout', 'AuthController@Logout');
+    $router->post('/login', 'AuthController@Login');
+    $router->post('/register', 'AuthController@Register');
+    $router->post('/logout', 'AuthController@Logout');
 
 
     //多種多様のラウト
-    $router->get('/api', function () use ($router) {
+    $router->get('/info', function () use ($router) {
+        return phpinfo();
+    });
+    $router->get('/', function () use ($router) {
         return '<h1>Hello, Jeiji from PHP!</h1>';
     });
     
-    $router->get('/api/welcome', function () use ($router) {
+    $router->get('/welcome', function () use ($router) {
         return response()->json(['name' => 'Jeiji!']);
         // return response($content, $status)
         //               ->header('Content-Type', $value);
     });
 
-});
-
-$router->get('/api/info', function () use ($router) {
-    return phpinfo();
 });
