@@ -7,9 +7,9 @@ Just putting the basics to work and learning how to get along with containers.
 
 ## セットアップ Setup
 
-リポジトリーをダウンロードしたら、env ファイルを準備する
+リポジトリーをクローンしたら、env ファイルを準備する
 
-Once you've downloaded the repository, prepare the env file
+Once you've cloned the repository, prepare the env file
 ~~~
 $ cd lumenlogin
 ~~~
