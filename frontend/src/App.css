@@ -82,7 +82,7 @@ button {
 }
 
 .small {
-	font-size: .25em;
+	font-size: .5em;
 }
 .login h1, .login p{ color: #fff; text-shadow: 0 0 10px rgba(0,0,0,0.3); letter-spacing:1px; text-align:left }
 
