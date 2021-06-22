@@ -72,7 +72,15 @@ body {
 	width:300px;
 	height:300px;
 }
-.login h1 { color: #fff; text-shadow: 0 0 10px rgba(0,0,0,0.3); letter-spacing:1px; text-align:center; }
+
+button {
+	text-align: center !important;
+}
+
+.small {
+	font-size: .25em;
+}
+.login h1, .login p{ color: #fff; text-shadow: 0 0 10px rgba(0,0,0,0.3); letter-spacing:1px; text-align:left }
 
 input { 
 	width: 100%; 

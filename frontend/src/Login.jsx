@@ -1,4 +1,5 @@
 import React from "react";
+import cookie from 'react-cookies';
 
 class Login extends React.Component {
   constructor(props) {
@@ -9,7 +10,16 @@ class Login extends React.Component {
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.loadUserIntoCookie = this.loadUserIntoCookie.bind(this);
   }
+
+  loadUserIntoCookie(response) {
+    let user = response.user;
+    console.log(response.access_token);
+    user.token = response.access_token;
+    
+    cookie.save('user', user, { path: '/' });
+  };
 
   handleInputChange(event){
     const target = event.target;
@@ -18,7 +28,7 @@ class Login extends React.Component {
     this.setState({
       [name]: value
     })
-  }
+  };
 
   handleSubmit(event) {
     // alert(`YUUUUUP: ${this.state.email}, ${this.state.password}`)
@@ -32,6 +42,9 @@ class Login extends React.Component {
       .then((res) => res.json())
       .then((result) => {
         console.log(result);
+        this.loadUserIntoCookie(result);
+      }).then(() => {
+        this.props.history.push('/');
       });
     event.preventDefault();
   }
@@ -46,7 +59,7 @@ class Login extends React.Component {
           </form>
       </div>
     )
-  }
+  };
 
   // componentDidMount() {
   //   fetch("/api/welcome")
@@ -56,6 +69,6 @@ class Login extends React.Component {
   //       this.setState(result);
   //     });
   // }
-}
+};
 
 export default Login;
