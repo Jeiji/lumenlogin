@@ -1,5 +1,7 @@
 import React from "react";
-import cookie from 'react-cookies'
+import cookie from 'react-cookies';
+import { Redirect } from 'react-router-dom';
+
 
 class Home extends React.Component {
   constructor(props) {
@@ -26,12 +28,16 @@ class Home extends React.Component {
         console.log(result);
         cookie.remove('user');
       }).then(() => {
-        this.props.history.push('/login');
+        console.log(this.props.history);
+      this.props.history.push('/login');
       });
     event.preventDefault();
   }
 
   render() {
+    if (cookie.load('user') === undefined) {
+      return <Redirect push to='/login'  />
+    }
     return (
       <div class="login">
         <h1>Heyo, { this.state.user.name }!</h1>
@@ -42,16 +48,15 @@ class Home extends React.Component {
     )
   }
 
-  // componentWillMount() {
-  //   // fetch("/api/welcome")
-  //   //   .then((res) => res.json())
-  //   //   .then((result) => {
-  //   //     console.log(result);
-  //   //     this.setState(result);
-  //   //   });
-  //   this.setState(cookie.load('user'))
-  //   console.log(this.state.user)
-  // }
+  componentDidMount() {
+
+    if (cookie.load('user') === undefined) {
+      console.log('SDFLSDF+LSDFJ')
+      this.props.history.push('/login');
+    }
+    this.setState(cookie.load('user'))
+    console.log(this.state.user)
+  }
 
 }
 

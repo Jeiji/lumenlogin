@@ -3,15 +3,20 @@ import './App.css';
 import Login from './Login';
 import Home from './Home';
 
+
+
+
 import { Route, Switch, BrowserRouter as Router } from 'react-router-dom'  
 
 function App() {
 
+  
+
   const routing = (  
-    <Router> 
+    <Router > 
         <div>  
           <Switch>
-            <Route exact path="/" component={Home} />  
+            <Route exact path="/" component={Home} /> 
             <Route path="/login" component={Login} />
           </Switch> 
         </div>  
