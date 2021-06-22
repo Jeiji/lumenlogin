@@ -45,7 +45,7 @@ $ docker exec -it lumen_api_1 sh
 
 Migrate and seed
 ~~~
-$ php artisan migrate --seed
+$ php artisan db:seed --class=UserSeeder
 ~~~
 
 
