@@ -19,7 +19,7 @@ $ make set-env
 ~~~
 
 
-## 開発 Development
+## 開発/利用 Development/Use
 
 To run app just run `make dev`を入力するだけで発動
 
@@ -27,12 +27,14 @@ To run app just run `make dev`を入力するだけで発動
 
 The app runs at the address noted above
 
+終わり
 
-### データベースを満たす Populating the database
+Done.
 
-ログインする前に、データベースを満たすのが必要。登録の機能を構築していないから、データベースからの情報を使ってログインするから。
 
-Before logging in you have to populate the database. Because there is no register function, you will use info from pre-registered fake users.
+
+
+### 既に登録されたユーザー情報でのログイン Login with pre-registered data
 
 APIのDockerのコンテイナーにターミナルから入る
 
@@ -40,20 +42,6 @@ Get into the api Docker container via the terminal
 ~~~
 $ docker exec -it lumen_api_1 sh
 ~~~
-
-マイグレートとシード
-
-Migrate and seed
-~~~
-$ php artisan db:seed --class=UserSeeder
-~~~
-
-
-### ログイン Login
-
-(まだ`lumen_api_1`のDockerコンテイナーの中で：)
-
-(Still from within the `lumen_api_1` container:)
 
 Tinkerを実行する
 
@@ -76,7 +64,5 @@ Enter the email, and the password below into the login page
 ~~~
 asdfjkl;
 ~~~
-終わり
 
-Done.
 
