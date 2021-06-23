@@ -6,20 +6,21 @@ import { Redirect } from 'react-router-dom';
 
 
 
-class Login extends React.Component {
+class Register extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
         email: "",
         password: "",
-        visible : false
+        name: "",
+        visible : false,
+        responseError: "",
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.loadUserIntoCookie = this.loadUserIntoCookie.bind(this);
-    this.handleRegister = this.handleRegister.bind(this);
-    this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.openModal = this.openModal.bind(this);
   }
 
   openModal() {
@@ -34,11 +35,6 @@ class Login extends React.Component {
       });
   }
 
-  
-  handleRegister(event){
-    this.props.history.push('/register');
-    event.preventDefault();
-  };
 
   loadUserIntoCookie(response) {
     let user = response.user;
@@ -53,7 +49,7 @@ class Login extends React.Component {
     const value = target.value;
     const name = target.name
     this.setState({
-      [name]: value
+      [name]: value,
     })
   };
 
@@ -65,7 +61,7 @@ class Login extends React.Component {
       body: formData
     }
     console.log(...formData);
-    fetch("/api/login", requestOptions)
+    fetch("/api/register", requestOptions)
       .then((res) => res.json())
       .then((result) => {
         console.log(result);
@@ -100,20 +96,20 @@ class Login extends React.Component {
                     onClickAway={() => this.closeModal()}
                     
                 >
-              <div class="mode mt-5">
-                  <h1>Sorry, you don't exist.</h1>
+                    <div class="mode mt-5">
+                  <h1>Nope.</h1>
                   <p>{this.state.responseError}</p>
                   <button class="btn btn-secondary" onClick={this.closeModal}>Close</button>
               </div>
-          </Modal>
-          <div class="login">
-            <h1>Login</h1>
+                </Modal>
+                <div class="login">
+            <h1>Register</h1>
               <form id="loginForm" method="post" onSubmit={this.handleSubmit}>
+                <input onChange={this.handleInputChange} type="text" name="name" placeholder="Name" required="required" />
                 <input onChange={this.handleInputChange} type="text" name="email" placeholder="Email" required="required" />
-                  <input onChange={this.handleInputChange} type="password" name="password" placeholder="Password" required="required" />
-                  <button type="submit" class="btn btn-primary btn-block btn-large">Let me in.</button>
+                <input onChange={this.handleInputChange} type="password" name="password" placeholder="Password" required="required" />
+                <button type="submit" class="btn btn-primary btn-block btn-large">Sign me up!</button>
               </form>
-              <button onClick={this.handleRegister} type="button" class="btn btn-link btn-block mt-3">Sign me up!</button>
           </div>
       </div>
     )
@@ -129,4 +125,4 @@ class Login extends React.Component {
   // }
 };
 
-export default Login;
+export default Register;

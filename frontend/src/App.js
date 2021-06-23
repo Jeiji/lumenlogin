@@ -2,6 +2,7 @@
 import './App.css';
 import Login from './Login';
 import Home from './Home';
+import Register from './Register';
 
 
 
@@ -18,6 +19,7 @@ function App() {
           <Switch>
             <Route exact path="/" component={Home} /> 
             <Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
           </Switch> 
         </div>  
     </Router>  

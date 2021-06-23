@@ -9,7 +9,7 @@ use Log;
 class AuthController extends Controller
 {
     public function login(Request $request) {
-        Log::info('Hey, just testing log', ['request' => $request]);
+        Log::info('Hey, just testing log', ['request' => $request->all()]);
         $email = $request->email;
         $password = $request->password;
 
@@ -20,8 +20,8 @@ class AuthController extends Controller
 
         $credentials = request(['email', 'password']);
 
-        if (! $token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+        if (! $token = auth()->setTTL(99999)->attempt($credentials)) {
+            return response()->json(['status' => 'error', 'message' => '証明が無効でした'], 401);
         }
 
         $user = User::where('email', '=', $email)->first();
@@ -32,12 +32,13 @@ class AuthController extends Controller
     }
     
     public function register(Request $request) {
+        Log::info('Hey, just testing log', ['request' => $request->all()]);
         $name = $request->name;
         $email = $request->email;
         $password = $request->password;
 
         // データ全部届いた？
-        if (empty($email) or empty($password)) {
+        if (empty($email) or empty($password) or empty($name)) {
             return response()->json(['status' => 'error', 'message' => 'フィールドを全部入力してください。']);
         }
 
@@ -47,7 +48,7 @@ class AuthController extends Controller
         }
 
          //パスワード字数が足りる？
-         if (strlen($password < 6)) {
+         if (strlen($password) < 6) {
             return response()->json(['status' => 'error', 'message' => 'パスワードの字数の最小限は6文字です。']);
         }
 
